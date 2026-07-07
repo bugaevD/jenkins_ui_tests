@@ -1,6 +1,6 @@
 import allure
 
-from base_jenkins_ui_tests.pages.registration_page import RegistrationPage
+from pages.registration_page import RegistrationPage
 
 
 @allure.title("Successful fill form")
