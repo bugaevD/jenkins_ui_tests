@@ -85,6 +85,9 @@ def setup_browser(request):
         command_executor=command_executor,
         options=options
     )
+    session_id = driver.session_id
+    print(f"\n🎬 Session ID: {session_id}")
+
     yield driver
     attach.add_screenshot(driver)
     attach.add_page_source(driver)
