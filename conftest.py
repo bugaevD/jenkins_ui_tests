@@ -28,9 +28,8 @@ def pytest_addoption(parser):
     parser.addoption(
         "--headless",
         action="store",
-        default=False,
-        help="Run browser in headless mode",
-        choices=("True", "False")
+        default="False",
+        help="Run browser in headless mode"
     )
     parser.addoption(
         "--window_size",
@@ -49,7 +48,7 @@ def pytest_addoption(parser):
 def setup_browser(request):
     browser = request.config.getoption("--browser")
     browser_version = request.config.getoption("--browser_version")
-    headless = request.config.getoption("--headless")
+    headless = request.config.getoption("--headless") == "True"
     window_size = request.config.getoption("--window_size")
 
     selenoid_url = os.getenv("SELENOID_URL")
@@ -74,7 +73,7 @@ def setup_browser(request):
 
     selenoid_capabilities = {
         "browserName": browser,
-        "browserVersion": browser_version,
+        # "browserVersion": browser_version,
         "selenoid:options": {
             "enableVNC": True,
             "enableVideo": True
