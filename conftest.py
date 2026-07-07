@@ -22,8 +22,8 @@ def pytest_addoption(parser):
     parser.addoption(
         "--browser_version",
         default="128.0",
-        help="Browser version to use",
-        choices=("127.0", "128.0", "129.0b")
+        help="Browser version to use. Versions 124.0 and 125.0 for Firefox, other for Chrome",
+        choices=("124.0", "125.0","127.0", "128.0", "129.0b")
     )
     parser.addoption(
         "--headless",
@@ -62,7 +62,7 @@ def setup_browser(request):
         options = ChromeOptions()
     elif browser == "firefox":
         options = FirefoxOptions()
-    elif browser == "safari":
+    elif browser == "edge":
         options = EdgeOptions()
     else:
         raise pytest.UsageError("Please choose chrome or firefox or edge")
@@ -74,7 +74,7 @@ def setup_browser(request):
 
     selenoid_capabilities = {
         "browserName": browser,
-        "browserVersion": '128.0',
+        "browserVersion": browser_version,
         "selenoid:options": {
             "enableVNC": True,
             "enableVideo": True
