@@ -4,8 +4,8 @@ from pages.registration_page import RegistrationPage
 
 
 @allure.title("Successful fill form")
-def test_successful(setup_browser, create_test_file):
-    registration_page = RegistrationPage(setup_browser)
+def test_successful(setup_browser, create_test_file, base_url):
+    registration_page = RegistrationPage(setup_browser, base_url)
     first_name = "Alex"
     last_name = "Egorov"
     email = "alex@egorov.com"
