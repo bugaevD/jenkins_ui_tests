@@ -4,7 +4,9 @@ import pytest
 from dotenv import load_dotenv
 from pygments.styles import default
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from utils import attach
 
 load_dotenv()
@@ -15,7 +17,7 @@ def pytest_addoption(parser):
         "--browser",
         default="chrome",
         help="Browser to use",
-        choices=("chrome", "firefox", "safari", "opera", "edge")
+        choices=("chrome", "firefox", "edge")
     )
     parser.addoption(
         "--browser_version",
@@ -56,13 +58,22 @@ def setup_browser(request):
 
     command_executor = f"https://{login}:{password}@{selenoid_url}"
 
-    options = Options()
+    if browser == "chrome":
+        options = ChromeOptions()
+    elif browser == "firefox":
+        options = FirefoxOptions()
+    elif browser == "safari":
+        options = EdgeOptions()
+    else:
+        raise pytest.UsageError("Please choose chrome or firefox or edge")
+
     if headless:
         options.add_argument("--headless")
+
     options.add_argument(f"--window-size={window_size}")
 
     selenoid_capabilities = {
-        "browserName": "chrome",
+        "browserName": browser,
         "browserVersion": '128.0',
         "selenoid:options": {
             "enableVNC": True,
