@@ -75,14 +75,14 @@ class RegistrationPage:
         element.clear()
         element.send_keys(number)
 
-    @allure.step("Select date of birth")
+    @allure.step("Select date of birth {year}{month}25")
     def select_birth_date(self, year, month):
         self.driver.find_element(*self.CALENDAR_INPUT).click()
         Select(self.driver.find_element(*self.YEAR_OF_BIRTH_SELECT)).select_by_value(year)
         Select(self.driver.find_element(*self.MONTH_OF_BIRTH_SELECT)).select_by_value(month)
         self.driver.find_element(*self.DAY_OF_BIRTH_SELECT).click()
 
-    @allure.step("Fill user subjects field")
+    @allure.step("Fill user subjects field (Maths)")
     def fill_user_subjects(self, subject):
         element = self.driver.find_element(*self.SUBJECTS)
         element.clear()
@@ -98,20 +98,20 @@ class RegistrationPage:
     def upload_test_png(self, test_png):
         self.driver.find_element(*self.UPLOAD_PICTURE).send_keys(test_png)
 
-    @allure.step("Fill current address")
+    @allure.step("Fill current address {current_address}")
     def fill_current_address(self, current_address):
         element = self.driver.find_element(*self.CURRENT_ADDRESS)
         element.clear()
         element.send_keys(current_address)
 
-    @allure.step("Select state")
+    @allure.step("Select state NCR")
     def select_state(self):
         self.driver.find_element(*self.STATE).click()
         state_dropdown = self.wait.until(
             EC.element_to_be_clickable((By.XPATH, f"//div[@class='state-city-option'][text()='NCR']")))
         state_dropdown.click()
 
-    @allure.step("Select city")
+    @allure.step("Select city Delhi")
     def select_city(self):
         self.driver.find_element(*self.CITY).click()
         city_dropdown = self.wait.until(
