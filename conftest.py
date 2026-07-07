@@ -23,7 +23,7 @@ def pytest_addoption(parser):
         "--browser_version",
         default="128.0",
         help="Browser version to use. Versions 124.0 and 125.0 for Firefox, other for Chrome",
-        choices=("124.0", "125.0", "127.0", "128.0", "129.0b")
+        choices=("127.0", "128.0", "149.0", "150.0")
     )
     parser.addoption(
         "--headless",
