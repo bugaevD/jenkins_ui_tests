@@ -9,7 +9,7 @@ from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from utils import attach
 
-load_dotenv()
+load_dotenv("test.env")
 
 
 def pytest_addoption(parser):
@@ -23,7 +23,7 @@ def pytest_addoption(parser):
         "--browser_version",
         default="128.0",
         help="Browser version to use. Versions 124.0 and 125.0 for Firefox, other for Chrome",
-        choices=("124.0", "125.0","127.0", "128.0", "129.0b")
+        choices=("124.0", "125.0", "127.0", "128.0", "129.0b")
     )
     parser.addoption(
         "--headless",
