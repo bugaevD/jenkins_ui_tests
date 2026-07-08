@@ -10,6 +10,8 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from utils import attach
 
 load_dotenv("test.env")
+
+
 # load_dotenv()
 
 
@@ -69,9 +71,8 @@ def setup_browser(request):
 
     if headless:
         options.add_argument("--headless")
+
     options.add_argument(f"--window-size={window_size}")
-
-
 
     selenoid_capabilities = {
         "browserName": browser,
@@ -87,29 +88,7 @@ def setup_browser(request):
         command_executor=command_executor,
         options=options
     )
-    # if browser == "chrome":
-    #     options = ChromeOptions()
-    # elif browser == "firefox":
-    #     options = FirefoxOptions()
-    # elif browser == "edge":
-    #     options = EdgeOptions()
-    # else:
-    #     raise pytest.UsageError(f"Browser {browser} not supported")
 
-
-
-    # if headless:
-    #     options.add_argument("--headless")
-
-    # if browser == "chrome":
-    #     driver = webdriver.Chrome(options=options)
-    # elif browser == "firefox":
-    #     driver = webdriver.Firefox(options=options)
-    # elif browser == "edge":
-    #     driver = webdriver.Edge(options=options)
-
-    window = driver.get_window_size()
-    print(window)
     yield driver
 
     attach.add_screenshot(driver)
