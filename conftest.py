@@ -25,7 +25,7 @@ def pytest_addoption(parser):
     parser.addoption(
         "--browser_version",
         default="128.0",
-        help="Browser version to use. Versions 124.0 and 125.0 for Firefox, other for Chrome",
+        help="Browser version to use. Versions 127.0 and 128.0 for Chrome, 144.0 and 145.0 for Edge, 149.0 and 150.0 for Firefox",
         choices=("127.0", "128.0", "144.0", "145.0", "149.0", "150.0")
     )
     parser.addoption(
