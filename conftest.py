@@ -69,7 +69,7 @@ def setup_browser(request):
 
     if headless:
         options.add_argument("--headless")
-    options.add_argument(f"--window-size={window_size.replace('x', ',')}")
+    options.add_argument(f"--window-size={window_size}")
 
 
 
