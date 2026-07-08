@@ -20,12 +20,12 @@ def pytest_addoption(parser):
         "--browser",
         default="chrome",
         help="Browser to use",
-        choices=("chrome", "firefox", "edge")
+        choices=("chrome", "firefox", "msedge")
     )
     parser.addoption(
         "--browser_version",
         default="148.0",
-        help="Browser version to use. Versions 148.0 and 149.0 for Chrome, 144.0 and 145.0 for Edge, 150.0 and 151.0 for Firefox",
+        help="Browser version to use. Versions 148.0 and 149.0 for Chrome, 144.0 and 145.0 for msedge, 150.0 and 151.0 for Firefox",
         choices=("144.0", "145.0", "148.0", "149.0", "150.0", "151.0")
     )
     parser.addoption(
@@ -64,7 +64,7 @@ def setup_browser(request):
         options = ChromeOptions()
     elif browser == "firefox":
         options = FirefoxOptions()
-    elif browser == "edge":
+    elif browser == "msedge":
         options = EdgeOptions()
     else:
         raise pytest.UsageError("Please choose chrome or firefox or edge")
