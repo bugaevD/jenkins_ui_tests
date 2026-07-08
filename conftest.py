@@ -9,7 +9,8 @@ from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from utils import attach
 
-load_dotenv("test.env")
+# load_dotenv("test.env")
+load_dotenv()
 
 
 def pytest_addoption(parser):
@@ -27,12 +28,12 @@ def pytest_addoption(parser):
     )
     parser.addoption(
         "--headless",
-        action="store",
-        default="False",
+        action="store_true",
+        default=False,
         help="Run browser in headless mode"
     )
     parser.addoption(
-        "--window_size",
+        "--window-size",
         default="1920x1080",
         help="Size of window to use",
         choices=("1920x1080", "2560x1440", "1280x720")
@@ -48,8 +49,8 @@ def pytest_addoption(parser):
 def setup_browser(request):
     browser = request.config.getoption("--browser")
     browser_version = request.config.getoption("--browser_version")
-    headless = request.config.getoption("--headless") == "True"
-    window_size = request.config.getoption("--window_size")
+    headless = request.config.getoption("--headless")
+    window_size = request.config.getoption("--window-size")
 
     selenoid_url = os.getenv("SELENOID_URL")
     login = os.getenv("LOGIN")
@@ -68,8 +69,9 @@ def setup_browser(request):
 
     if headless:
         options.add_argument("--headless")
+    options.add_argument(f"--window-size={window_size.replace('x', ',')}")
 
-    options.add_argument(f"--window-size={window_size}")
+
 
     selenoid_capabilities = {
         "browserName": browser,
@@ -85,8 +87,31 @@ def setup_browser(request):
         command_executor=command_executor,
         options=options
     )
+    # if browser == "chrome":
+    #     options = ChromeOptions()
+    # elif browser == "firefox":
+    #     options = FirefoxOptions()
+    # elif browser == "edge":
+    #     options = EdgeOptions()
+    # else:
+    #     raise pytest.UsageError(f"Browser {browser} not supported")
 
+
+
+    # if headless:
+    #     options.add_argument("--headless")
+
+    # if browser == "chrome":
+    #     driver = webdriver.Chrome(options=options)
+    # elif browser == "firefox":
+    #     driver = webdriver.Firefox(options=options)
+    # elif browser == "edge":
+    #     driver = webdriver.Edge(options=options)
+
+    window = driver.get_window_size()
+    print(window)
     yield driver
+
     attach.add_screenshot(driver)
     attach.add_page_source(driver)
     attach.add_console_logs(driver)
