@@ -28,8 +28,8 @@ def pytest_addoption(parser):
     )
     parser.addoption(
         "--headless",
-        action="store_true",
-        default=False,
+        type=str,
+        default="false",
         help="Run browser in headless mode"
     )
     parser.addoption(
@@ -49,7 +49,7 @@ def pytest_addoption(parser):
 def setup_browser(request):
     browser = request.config.getoption("--browser")
     browser_version = request.config.getoption("--browser_version")
-    headless = request.config.getoption("--headless")
+    headless = request.config.getoption("--headless").lower() == "true"
     window_size = request.config.getoption("--window-size")
 
     selenoid_url = os.getenv("SELENOID_URL")
