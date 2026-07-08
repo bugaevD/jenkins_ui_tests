@@ -9,8 +9,8 @@ from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from utils import attach
 
-# load_dotenv("test.env")
-load_dotenv()
+load_dotenv("test.env")
+# load_dotenv()
 
 
 def pytest_addoption(parser):
