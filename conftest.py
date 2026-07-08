@@ -24,9 +24,9 @@ def pytest_addoption(parser):
     )
     parser.addoption(
         "--browser_version",
-        default="128.0",
-        help="Browser version to use. Versions 127.0 and 128.0 for Chrome, 144.0 and 145.0 for Edge, 149.0 and 150.0 for Firefox",
-        choices=("127.0", "128.0", "144.0", "145.0", "149.0", "150.0")
+        default="148.0",
+        help="Browser version to use. Versions 148.0 and 149.0 for Chrome, 144.0 and 145.0 for Edge, 150.0 and 151.0 for Firefox",
+        choices=("144.0", "145.0", "148.0", "149.0", "150.0", "151.0")
     )
     parser.addoption(
         "--headless",
