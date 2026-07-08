@@ -12,9 +12,6 @@ from utils import attach
 load_dotenv("test.env")
 
 
-# load_dotenv()
-
-
 def pytest_addoption(parser):
     parser.addoption(
         "--browser",
@@ -95,8 +92,7 @@ def setup_browser(request):
 
     attach.add_screenshot(driver)
     attach.add_page_source(driver)
-    if browser != "firefox":
-        attach.add_console_logs(driver)
+    attach.add_console_logs(driver)
     attach.add_video(driver)
     driver.quit()
 
