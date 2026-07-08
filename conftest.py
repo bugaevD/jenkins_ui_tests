@@ -90,13 +90,12 @@ def setup_browser(request):
     )
     window = driver.get_window_size()
     print(window)
-    headless_check = driver.get
 
     yield driver
 
     attach.add_screenshot(driver)
     attach.add_page_source(driver)
-    if not browser == "firefox":
+    if browser != "firefox":
         attach.add_console_logs(driver)
     attach.add_video(driver)
     driver.quit()
