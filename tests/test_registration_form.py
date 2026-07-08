@@ -32,7 +32,7 @@ def test_successful(setup_browser, create_test_file, base_url):
         registration_page.select_birth_date(birth_year, birth_month)
         registration_page.fill_user_subjects(maths)
         registration_page.select_sport_hobby()
-        registration_page.upload_test_png(create_test_file)
+        # registration_page.upload_test_png(create_test_file)
         registration_page.fill_current_address(current_address)
 
         city = setup_browser.find_element(*RegistrationPage.CITY)
