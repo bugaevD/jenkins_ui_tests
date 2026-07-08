@@ -85,8 +85,7 @@ def setup_browser(request):
         command_executor=command_executor,
         options=options
     )
-    window = driver.get_window_size()
-    print(window)
+
 
     yield driver
 
